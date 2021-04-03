@@ -67,7 +67,6 @@ def is_admin(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         user = kwargs["user"]
-        print(user)
         if not user.get("admin"):
             raise Unauthorized("You are not allowed to access this.", status=403)
         return func(*args, **kwargs)
@@ -92,11 +91,12 @@ def action_log(action):
             res = func(*args, **kwargs)
             context = kwargs["context"]
             user = kwargs["user"]
-            user_id = user["_id"] if user else None
-            # log = ActionLog(user_id=user_id, action=action, body=json_util.dumps(request.json))
-            # print(log)
-            # todo: come back
-            # context.logs.insert(log)
+            user_id = user.get("_id") 
+            context.logs.insert({
+                "user_id": user_id,
+                "action": action,
+                "body": json_util.dumps(request.json)
+            })
             return res
         return wrapper
     return inner

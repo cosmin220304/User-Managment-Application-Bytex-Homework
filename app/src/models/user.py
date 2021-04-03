@@ -29,8 +29,6 @@ class User(UserAdapter, Rest):
     def update_user(cls, context, body, user_id):
         validate_user_schema(body)
         user = cls.get_user_by_id(context, user_id)
-        if not user or not user.get("active"):
-            return Conflict("The user you are trying to update does not exist", 404)
         updated_user = User()
         updated_user.to_object(body)
         context.users.update_one({"_id": user["_id"]}, {"$set": updated_user.__dict__})
@@ -38,14 +36,15 @@ class User(UserAdapter, Rest):
     @classmethod
     def deactivate_user(cls, context, user_id):
         user = cls.get_user_by_id(context, user_id)
-        if not user or not user.get("active"):
-            return Conflict("The user you are trying to update does not exist", 404)
         user["active"] = False
         context.users.update_one({"_id": user["_id"]}, {"$set": user})
 
     @classmethod
     def get_user_by_id(cls, context, user_id):
-        return context.users.find_one({"_id": bson.ObjectId(oid=str(user_id))})
+        user = context.users.find_one({"_id": bson.ObjectId(oid=str(user_id))})
+        if not user or not user.get("active"):
+            raise Conflict("User does not exist", status=404)
+        return user
 
     @classmethod
     def get_user_by_email(cls, context, email):
