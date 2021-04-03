@@ -18,7 +18,7 @@ class Company(CompanyAdapter, Rest):
 
     @classmethod
     def create_company(cls, context, body):
-        validate_company_schema(body)
+        validate_company_schema(body, type="CREATE")
         if cls.get_company_by_name(context, body.get("name")):
             raise Conflict("This company name already exists", status=409)
         company = Company()
@@ -27,7 +27,7 @@ class Company(CompanyAdapter, Rest):
 
     @classmethod
     def update_company(cls, context, body, company_id):
-        validate_company_schema(body)
+        validate_company_schema(body, type="UPDATE")
         company = cls.get_company_by_id(context, company_id)
         updated_company = Company()
         updated_company.to_object(body)

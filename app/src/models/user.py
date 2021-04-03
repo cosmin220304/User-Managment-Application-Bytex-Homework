@@ -12,13 +12,24 @@ class User(UserAdapter, Rest):
     def get_users(cls, context, request):
         search = cls.get_search(request)
         offset, limit = cls.get_pagination(request)
-        users = [user for user in context.users.find(search).skip(offset).limit(limit)]
-        total = len(users)
-        return cls.to_json(total, users)
+        users = context.users.find(search).skip(offset).limit(limit)
+        users_with_company = [cls.populate_user(context, user) for user in users]
+        total = len(users_with_company)
+        return cls.to_json(total, users_with_company)
+
+    @classmethod
+    def populate_user(cls, context, user):
+        company_id = user.get("company")
+        if not company_id:
+            return user
+        company = context.companies.find_one({"_id": bson.ObjectId(oid=str(company_id))})
+        user['company'] = company
+        print(user)
+        return user
 
     @classmethod
     def create_user(cls, context, body):
-        validate_user_schema(body)
+        validate_user_schema(body, "CREATE")
         if cls.get_user_by_email(context, body.get("email")):
             raise Conflict("This email address is already used", status=409)
         user = User()
@@ -27,7 +38,7 @@ class User(UserAdapter, Rest):
 
     @classmethod
     def update_user(cls, context, body, user_id):
-        validate_user_schema(body)
+        validate_user_schema(body, "UPDATE")
         user = cls.get_user_by_id(context, user_id)
         updated_user = User()
         updated_user.to_object(body)

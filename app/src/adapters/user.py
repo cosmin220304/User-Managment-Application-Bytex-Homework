@@ -8,7 +8,6 @@ from src.schemas.users import user_schema
 
 
 class UserAdapter:
-
     @staticmethod
     def to_json(total, results):
         return {
@@ -19,6 +18,7 @@ class UserAdapter:
                     "email": user.get("email", ""),
                     "first_name": user.get("first_name", ""),
                     "last_name": user.get("last_name", ""),
+                    "company": user.get("company", "")
                 } for user in results if user.get("active")
             ]
         }

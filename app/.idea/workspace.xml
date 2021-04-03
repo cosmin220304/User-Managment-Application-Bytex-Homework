@@ -2,17 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0593a9c3-8094-4c3b-aa35-a5ff8bddbf9c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/adapters/company.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/endpoints/company.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/schemas/companies.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/adapters/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/adapters/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/endpoints/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/endpoints/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/endpoints/company.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/endpoints/company.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/company.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/company.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/rest.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/rest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/decorators.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/decorators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/user_company.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/schemas/companies.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/schemas/companies.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/schemas/users.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/schemas/users.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/validators.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/validators.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

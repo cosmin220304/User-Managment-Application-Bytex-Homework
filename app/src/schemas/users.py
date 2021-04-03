@@ -1,3 +1,5 @@
+from bson import objectid
+
 user_schema = {
     'email': {
         'type': str,
@@ -25,7 +27,10 @@ user_schema = {
     },
     'password': {
         'type': str,
-        'minlength': 5,
+        'min_length': 5,
         'required': True,
+    },
+    'company': {
+        'type': objectid.ObjectId,  # fk in mongodb basically
     }
 }

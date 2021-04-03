@@ -21,7 +21,7 @@ def get_companies(context, user):
 @session
 @is_authorized
 @is_admin
-# @action_log(action="UPDATE COMPANY")
+@action_log(action="CREATE COMPANY")
 def post_company(context, user):
     body = request.json
     Company.create_company(context, body)
@@ -33,7 +33,7 @@ def post_company(context, user):
 @session
 @is_authorized
 @is_admin
-# @action_log(action="UPDATE COMPANY")
+@action_log(action="UPDATE COMPANY")
 def put_company(context, company_id, user):
     body = request.json
     Company.update_company(context, body, company_id)
@@ -45,7 +45,7 @@ def put_company(context, company_id, user):
 @session
 @is_authorized
 @is_admin
-# @action_log(action="DELETE COMPANY")
+@action_log(action="DELETE COMPANY")
 def delete_company(context, company_id, user):
     Company.deactivate_company(context, company_id)
     return Response(status=200, response="Resource deleted")

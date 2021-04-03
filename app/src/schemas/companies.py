@@ -1,3 +1,5 @@
+from bson import objectid
+
 company_schema = {
     'name': {
         'type': str,
