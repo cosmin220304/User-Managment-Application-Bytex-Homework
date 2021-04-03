@@ -1,32 +1,31 @@
 user_schema = {
     'email': {
-        'type': 'string',
-        'minlength': 1,
+        'type': str,
+        'min_length': 1,
         'required': True,
     },
-    'firstName': {
-        'type': 'string',
-        'minlength': 1,
+    'first_name': {
+        'type': str,
+        'min_length': 1,
     },
-    'lastName': {
-        'type': 'string',
-        'minlength': 1,
+    'last_name': {
+        'type': str,
+        'min_length': 1,
     },
     'phone': {
-        'type': 'string',
-        'minlength': 10,
+        'type': str,
+        'min_length': 10,
     },
     'admin': {
-        'type': 'bool',
-        'default': False
+        'type': bool,
     },
     'active': {
-        'type': 'bool',
+        'type': bool,
         'default': True
     },
     'password': {
-        'type': 'bool',
+        'type': str,
         'minlength': 5,
         'required': True,
-    },
+    }
 }

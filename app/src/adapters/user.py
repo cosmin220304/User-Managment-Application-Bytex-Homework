@@ -8,20 +8,18 @@ from src.schemas.users import user_schema
 
 class UserAdapter:
 
-
     @staticmethod
     def to_json(total, results):
         return {
-                "total": total,
-                "items": [
-                    {
-                        "_id": user['_id'],
-                        "email": user.get('email', ''),
-                        "active": user.get('active', ''),
-                        "first_name": user.get('first_name', ''),
-                        "last_name": user.get('last_name', ''),
-                    } for user in results
-                ]
+            "total": total,
+            "items": [
+                {
+                    "_id": user["_id"],
+                    "email": user.get("email", ""),
+                    "first_name": user.get("first_name", ""),
+                    "last_name": user.get("last_name", ""),
+                } for user in results if user.get("active")
+            ]
         }
 
     def to_object(self, body):
@@ -30,21 +28,17 @@ class UserAdapter:
                 password, salt = self.generate_password(value)
                 self.password = password
                 self.salt = salt
-            elif key == 'admin':
+            elif key == "admin":
                 raise Unauthorized("You are not allowed to change this.", status=403)
-            else:
-                if hasattr(self, key):
-                    setattr(self, key, value)
-
-        if 'admin' not in body.keys():
-            setattr(self, 'admin', False)
+            elif key in user_schema.keys():
+                setattr(self, key, value)
 
     @staticmethod
     def generate_password(password, salt=None):
         if salt is None:
             salt = bcrypt.gensalt()
         password = bcrypt.hashpw(a2b_qp(password), salt)
-        return password.decode('utf-8'), salt.decode('utf-8')
+        return password.decode("utf-8"), salt.decode("utf-8")
 
     @staticmethod
     def generate_session():

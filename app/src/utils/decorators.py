@@ -42,7 +42,7 @@ def is_authorized(func):
     def wrapper(*args, **kwargs):
 
         context = kwargs.get("context") or get_database_session()
-        session_id = request.headers.get('Authorization')
+        session_id = request.headers.get("Authorization")
 
         user = User.get_user_by_session(context, session_id)
 
@@ -52,13 +52,13 @@ def is_authorized(func):
         if not user:
             raise Unauthorized("You are not allowed to access this.", status=401)
 
-        if datetime.now() - user['session_create_time'] > timedelta(minutes=30):
+        if datetime.now() - user["session_create_time"] > timedelta(minutes=30):
             raise Unauthorized("You are not allowed to access this.", status=401)
 
         kwargs["user"] = user
         res = func(*args, **kwargs)
-        user['session_create_time'] = datetime.now()
-        context.users.update_one({'_id': user['_id']}, {'$set': user})
+        user["session_create_time"] = datetime.now()
+        context.users.update_one({"_id": user["_id"]}, {"$set": user})
         return res
     return wrapper
 
@@ -67,7 +67,8 @@ def is_admin(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         user = kwargs["user"]
-        if not user['admin']:
+        print(user)
+        if not user.get("admin"):
             raise Unauthorized("You are not allowed to access this.", status=403)
         return func(*args, **kwargs)
     return wrapper
@@ -78,7 +79,7 @@ def is_admin_or_self(func):
     def wrapper(*args, **kwargs):
         user = kwargs["user"]
         updated_user_id = kwargs["user_id"]
-        if not user['admin'] and updated_user_id != user['_id']:
+        if not user.get("admin") and updated_user_id != user["_id"]:
             raise Unauthorized("You are not allowed to access this.", status=403)
         return func(*args, **kwargs)
     return wrapper
@@ -91,7 +92,7 @@ def action_log(action):
             res = func(*args, **kwargs)
             context = kwargs["context"]
             user = kwargs["user"]
-            user_id = user['_id'] if user else None
+            user_id = user["_id"] if user else None
             # log = ActionLog(user_id=user_id, action=action, body=json_util.dumps(request.json))
             # print(log)
             # todo: come back
