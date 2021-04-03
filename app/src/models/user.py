@@ -4,8 +4,9 @@ import bson
 from src.adapters.user import UserAdapter
 from src.models.company import Company
 from src.models.rest import Rest
-from src.utils.exceptions import Conflict, HTTPException
+from src.utils.exceptions import Conflict, HTTPException, InvalidBody
 from src.utils.validators import validate_user_schema
+from bson import objectid
 
 
 class User(UserAdapter, Rest):
@@ -40,6 +41,25 @@ class User(UserAdapter, Rest):
         user = cls.get_user_by_id(context, user_id)
         user["active"] = False
         context.users.update_one({"_id": user["_id"]}, {"$set": user})
+
+    @classmethod
+    def add_company(cls, context, body, user_id):
+        user = cls.get_user_by_id(context, user_id)
+
+        if body.get("company"):
+            company = Company().get_company_by_name(context, body["company"])
+            company_id = company.get("_id")
+        elif body.get("company_id"):
+            company_id = body["company_id"]
+        else:
+            raise InvalidBody("No company name or id given (expected fields: company or company_id)", status=400)
+
+        if not objectid.ObjectId.is_valid(company_id):
+            raise InvalidBody("Company not found", status=404)
+
+        company_id = objectid.ObjectId(company_id)
+        context.users.update_one({"_id": user["_id"]}, {"$addToSet": {"companies_id": company_id}})
+        # note that $addToSet adds a value to an array unless the value is already present ^
 
     @classmethod
     def get_user_by_id(cls, context, user_id):

@@ -46,3 +46,15 @@ def put_user(context, user_id, user):
 def delete_user(context, user_id, user):
     User.deactivate_user(context, user_id)
     return Response(status=200, response="Resource deleted")
+
+
+@user_bp.route('/<user_id>', methods=['PATCH'])
+@http_handling
+@session
+@is_authorized
+@is_admin
+@action_log(action="PATCH USER")
+def path_user(context, user_id, user):
+    body = request.json
+    User.add_company(context, body, user_id)
+    return Response(status=200, response="Resource updated")
