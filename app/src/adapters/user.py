@@ -1,27 +1,42 @@
 import bcrypt
 import hashlib
+import bson
 
 from numpy import random
 from binascii import a2b_qp
+from src.models.company import Company
 from src.utils.exceptions import Unauthorized
 from src.schemas.users import user_schema
 
 
 class UserAdapter:
-    @staticmethod
-    def to_json(total, results):
+    @classmethod
+    def to_json(cls, total, context, results):
         return {
             "total": total,
             "items": [
                 {
-                    "_id": user["_id"],
+                    "_id": str(user["_id"]),
                     "email": user.get("email", ""),
                     "first_name": user.get("first_name", ""),
                     "last_name": user.get("last_name", ""),
-                    "company": user.get("company", "")
+                    "companies": cls.get_companies_for_user(context, user)
                 } for user in results if user.get("active")
             ]
         }
+
+    @classmethod
+    def get_companies_for_user(cls, context, user):
+        companies = []
+
+        for company_id in user.get("companies_id", []):
+            company = context.companies.find_one({"_id": bson.ObjectId(oid=str(company_id))})
+            if company:
+                companies.append(company)
+
+        total = len(companies)
+        company_details = Company()
+        return company_details.to_json(total, context, companies)
 
     def to_object(self, body):
         for key, value in body.items():

@@ -1,9 +1,8 @@
-import datetime
 import bson
 
 from src.adapters.company import CompanyAdapter
 from src.models.rest import Rest
-from src.utils.exceptions import Conflict, HTTPException
+from src.utils.exceptions import Conflict
 from src.utils.validators import validate_company_schema
 
 
@@ -14,11 +13,18 @@ class Company(CompanyAdapter, Rest):
         offset, limit = cls.get_pagination(request)
         companies = [company for company in context.companies.find(search).skip(offset).limit(limit)]
         total = len(companies)
-        return cls.to_json(total, companies)
+        return cls.to_json(total, context, companies)
+
+    @classmethod
+    def populate_company(cls, context, company):
+        employees = context.users.find({"companies_id": bson.ObjectId(oid=str(company["_id"]))})
+        company["employees_ids"] = [str(employee["_id"]) for employee in employees]
+        print(company["employees_ids"])
+        return company
 
     @classmethod
     def create_company(cls, context, body):
-        validate_company_schema(body, type="CREATE")
+        validate_company_schema(body, action_type="CREATE")
         if cls.get_company_by_name(context, body.get("name")):
             raise Conflict("This company name already exists", status=409)
         company = Company()
@@ -27,7 +33,7 @@ class Company(CompanyAdapter, Rest):
 
     @classmethod
     def update_company(cls, context, body, company_id):
-        validate_company_schema(body, type="UPDATE")
+        validate_company_schema(body, action_type="UPDATE")
         company = cls.get_company_by_id(context, company_id)
         updated_company = Company()
         updated_company.to_object(body)

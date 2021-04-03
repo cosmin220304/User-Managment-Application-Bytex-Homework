@@ -89,7 +89,6 @@ def action_log(action):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
             res = func(*args, **kwargs)
-            print(kwargs)
             context = kwargs["context"]
             user = kwargs["user"]
             user_id = user.get("_id")

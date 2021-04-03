@@ -4,12 +4,12 @@ from src.utils.exceptions import InvalidBody
 from bson import objectid
 
 
-def validate_user_schema(body, type):
-    validate_schema(body, user_schema, type)
+def validate_user_schema(body, action_type):
+    validate_schema(body, user_schema, action_type)
 
 
-def validate_company_schema(body, type):
-    validate_schema(body, company_schema, type)
+def validate_company_schema(body, action_type):
+    validate_schema(body, company_schema, action_type)
 
 
 def validate_schema(body, schema, action_type):
@@ -24,18 +24,24 @@ def validate_schema(body, schema, action_type):
                     body[field] = restriction['default']
             continue
 
-        if restriction['type'] == objectid.ObjectId:  # converts str to mongodb objectId
-            if not objectid.ObjectId.is_valid(body_value):
-                raise InvalidBody(f"invalid object id", status=400)
-            body[field] = objectid.ObjectId(body_value)
+        if restriction['type'] == [objectid.ObjectId]:
+            mongodb_ids = []
+
+            if not isinstance(body_value, list):
+                raise InvalidBody(f"{field} should be an array of mongodb objectId", status=400)
+            for string_id in body_value:
+                if not objectid.ObjectId.is_valid(string_id):
+                    raise InvalidBody(f"{field} has an invalid mongodb objectId", status=400)
+                mongodb_ids.append(objectid.ObjectId(string_id))
+
+            body[field] = mongodb_ids
             continue
 
         if not isinstance(body_value, restriction['type']):
             wanted_type = restriction['type'].__name__
-            received_type = type(body.get(field)).__name__
+            received_type = type(body_value).__name__
             raise InvalidBody(f"{field} is of type {wanted_type} but received {received_type}", status=400)
 
         if 'min_length' in restriction:
-            print(restriction['min_length'])
             if len(body_value) < restriction['min_length']:
                 raise InvalidBody(f"{field} should be at least {restriction['min_length']}", status=400)

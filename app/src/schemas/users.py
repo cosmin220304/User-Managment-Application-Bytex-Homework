@@ -30,7 +30,7 @@ user_schema = {
         'min_length': 5,
         'required': True,
     },
-    'company': {
-        'type': objectid.ObjectId,  # fk in mongodb basically
+    'companies_id': {
+        'type': [objectid.ObjectId],  # fk in mongodb basically
     }
 }

@@ -2,6 +2,7 @@ import datetime
 import bson
 
 from src.adapters.user import UserAdapter
+from src.models.company import Company
 from src.models.rest import Rest
 from src.utils.exceptions import Conflict, HTTPException
 from src.utils.validators import validate_user_schema
@@ -12,24 +13,13 @@ class User(UserAdapter, Rest):
     def get_users(cls, context, request):
         search = cls.get_search(request)
         offset, limit = cls.get_pagination(request)
-        users = context.users.find(search).skip(offset).limit(limit)
-        users_with_company = [cls.populate_user(context, user) for user in users]
-        total = len(users_with_company)
-        return cls.to_json(total, users_with_company)
-
-    @classmethod
-    def populate_user(cls, context, user):
-        company_id = user.get("company")
-        if not company_id:
-            return user
-        company = context.companies.find_one({"_id": bson.ObjectId(oid=str(company_id))})
-        user['company'] = company
-        print(user)
-        return user
+        users = [user for user in context.users.find(search).skip(offset).limit(limit)]
+        total = len(users)
+        return cls.to_json(total, context, users)
 
     @classmethod
     def create_user(cls, context, body):
-        validate_user_schema(body, "CREATE")
+        validate_user_schema(body, action_type="CREATE")
         if cls.get_user_by_email(context, body.get("email")):
             raise Conflict("This email address is already used", status=409)
         user = User()
@@ -38,11 +28,12 @@ class User(UserAdapter, Rest):
 
     @classmethod
     def update_user(cls, context, body, user_id):
-        validate_user_schema(body, "UPDATE")
+        validate_user_schema(body, action_type="UPDATE")
         user = cls.get_user_by_id(context, user_id)
         updated_user = User()
         updated_user.to_object(body)
-        context.users.update_one({"_id": user["_id"]}, {"$set": updated_user.__dict__})
+        if updated_user:
+            context.users.update_one({"_id": user["_id"]}, {"$set": updated_user.__dict__})
 
     @classmethod
     def deactivate_user(cls, context, user_id):
