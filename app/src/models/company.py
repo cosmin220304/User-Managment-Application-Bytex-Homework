@@ -4,7 +4,7 @@ from src.adapters.company import CompanyAdapter
 from src.models.rest import Rest
 from src.utils.exceptions import Conflict
 from src.utils.validators import validate_company_schema
-
+from src.models.user_company import User_company
 
 class Company(CompanyAdapter, Rest):
     @classmethod
@@ -14,13 +14,6 @@ class Company(CompanyAdapter, Rest):
         companies = [company for company in context.companies.find(search).skip(offset).limit(limit)]
         total = len(companies)
         return cls.to_json(total, context, companies)
-
-    @classmethod
-    def populate_company(cls, context, company):
-        employees = context.users.find({"companies_id": bson.ObjectId(oid=str(company["_id"]))})
-        company["employees_ids"] = [str(employee["_id"]) for employee in employees]
-        print(company["employees_ids"])
-        return company
 
     @classmethod
     def create_company(cls, context, body):
@@ -38,6 +31,10 @@ class Company(CompanyAdapter, Rest):
         updated_company = Company()
         updated_company.to_object(body)
         context.companies.update_one({"_id": company["_id"]}, {"$set": updated_company.__dict__})
+
+    @classmethod
+    def add_employee(cls, context, body, company_id):
+        User_company.add_user_to_company(context, body, company_id)
 
     @classmethod
     def deactivate_company(cls, context, company_id):

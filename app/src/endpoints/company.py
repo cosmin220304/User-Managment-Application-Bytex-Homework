@@ -2,7 +2,7 @@ from bson import json_util
 from flask import request, Blueprint, Response
 
 from src.models.company import Company
-from src.utils.decorators import session, http_handling, is_authorized, is_admin_or_self, is_admin, action_log
+from src.utils.decorators import session, http_handling, is_authorized, is_admin, action_log
 
 company_bp = Blueprint('companies', __name__, url_prefix='/companies')
 
@@ -49,3 +49,15 @@ def put_company(context, company_id, user):
 def delete_company(context, company_id, user):
     Company.deactivate_company(context, company_id)
     return Response(status=200, response="Resource deleted")
+
+
+@company_bp.route('/<company_id>', methods=['PATCH'])
+@http_handling
+@session
+@is_authorized
+@is_admin
+@action_log(action="PATCH COMPANY")
+def path_user(context, company_id, user):
+    body = request.json
+    Company.add_employee(context, body, company_id)
+    return Response(status=200, response="Resource updated")
