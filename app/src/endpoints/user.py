@@ -53,7 +53,7 @@ def delete_user(context, user_id, user):
 @session
 @is_authorized
 @is_admin
-@action_log(action="PATCH USER")
+@action_log(action="ADD COMPANY")
 def path_user(context, user_id, user):
     body = request.json
     User.add_company(context, body, user_id)

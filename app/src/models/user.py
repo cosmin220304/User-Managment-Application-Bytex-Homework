@@ -63,7 +63,7 @@ class User(UserAdapter, Rest):
     @classmethod
     def login(cls, context, body):
         user = cls.get_user_by_email(context, body.get("email"))
-        if not user:
+        if not user or not user.get("active"):
             raise HTTPException("The email or the password is incorrect", status=400)
 
         password, _ = cls.generate_password(body.get("password"), user["salt"].encode("utf-8"))

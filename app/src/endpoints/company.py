@@ -56,7 +56,7 @@ def delete_company(context, company_id, user):
 @session
 @is_authorized
 @is_admin
-@action_log(action="PATCH COMPANY")
+@action_log(action="ADD USER")
 def path_user(context, company_id, user):
     body = request.json
     Company.add_employee(context, body, company_id)
