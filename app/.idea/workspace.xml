@@ -2,46 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0593a9c3-8094-4c3b-aa35-a5ff8bddbf9c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/User-Managment-application.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Procfile" beforeDir="false" afterPath="$PROJECT_DIR$/../Procfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/fii-practic-flask-boilerplate.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database_management.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fii_practic_database" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/adapters/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/adapters/company.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/adapters/logs.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/adapters/user.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/endpoints/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/endpoints/company.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/endpoints/login.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/endpoints/logs.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/endpoints/user.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/company.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/logs.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/rest.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/user.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/user_company.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/schemas/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/schemas/companies.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/schemas/users.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/decorators.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/exceptions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/validators.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../run.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
