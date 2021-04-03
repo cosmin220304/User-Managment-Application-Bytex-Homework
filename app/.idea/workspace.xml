@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0593a9c3-8094-4c3b-aa35-a5ff8bddbf9c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/adapters/logs.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/endpoints/logs.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/logs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Procfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/endpoints/company.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/endpoints/company.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/endpoints/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/endpoints/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../run.py" beforeDir="false" afterPath="$PROJECT_DIR$/../run.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
