@@ -6,6 +6,7 @@ from binascii import a2b_qp
 from src.utils.exceptions import Unauthorized
 from src.schemas.users import user_schema
 
+
 class UserAdapter:
 
     @staticmethod

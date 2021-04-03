@@ -10,8 +10,8 @@ from src.utils.validators import validate_user_schema
 class User(UserAdapter, Rest):
     @classmethod
     def get_users(cls, context, request):
-        search = cls.add_search(request)
-        offset, limit = cls.add_pagination(request)
+        search = cls.get_search(request)
+        offset, limit = cls.get_pagination(request)
         users = [user for user in context.users.find(search).skip(offset).limit(limit)]
         total = len(users)
         return cls.to_json(total, users)

@@ -1,9 +1,18 @@
 from src.schemas.users import user_schema
+from src.schemas.companies import company_schema
 from src.utils.exceptions import InvalidBody
 
 
 def validate_user_schema(body):
-    for field, restriction in user_schema.items():
+    validate_schema(body, user_schema)
+
+
+def validate_company_schema(body):
+    validate_schema(body, company_schema)
+
+
+def validate_schema(body, schema):
+    for field, restriction in schema.items():
         body_value = body.get(field)
         if not body_value:
             if 'required' in restriction:

@@ -1,7 +1,6 @@
-import json
-
 from bson import json_util
 from flask import request, Blueprint, Response
+
 from src.models.user import User
 from src.utils.decorators import session, http_handling, is_authorized, is_admin_or_self, is_admin, action_log
 
