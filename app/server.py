@@ -9,8 +9,8 @@ from src.endpoints.user import user_bp
 from src.endpoints.login import login_bp
 
 
-def configure_app(app):
-    init_database_connection(app)
+def configure_app(application):
+    init_database_connection(application)
 
 
 app = Flask(__name__)
