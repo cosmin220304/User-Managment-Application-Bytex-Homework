@@ -4,7 +4,7 @@
 ###### (note: heroku website "go asleep" if no request is sent to them, so you will have to wait a bit for your first request)
 https://user-managment-app-bytex.herokuapp.com/status
 
-## Api's 
+## Api's 🔌
 - post /users to register
 - post /login to login and get a session token
 - get /users to see database users
@@ -15,7 +15,7 @@ https://user-managment-app-bytex.herokuapp.com/status
 - get /companies to get  all companies
 - put /companies/<mongodb id> to update a company
 - patch /companies/<mongodb id> to add an user to a company
-- delete /comapnies/<mongodb id> to delete a company
+- delete /companies/<mongodb id> to delete a company
 ###### (some need admin rights, you can use email:"admin", password: "admin" for that)
 
 ## What I needed to do
