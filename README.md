@@ -1,6 +1,7 @@
 # User Managment Application
 
 ## Test the application below: 👇
+###### (note: heroku website "go asleep" if no request is sent to them, so you will have to wait a bit for your first request)
 https://user-managment-app-bytex.herokuapp.com/status
 
 ## Api's 
