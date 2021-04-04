@@ -18,5 +18,5 @@ https://user-managment-app-bytex.herokuapp.com/status
 - delete /companies/<mongodb id> to delete a company
 ###### (some need admin rights, you can use email:"admin", password: "admin" for that)
 
-## What I needed to do
+## What I needed to do 📚
 ![image](https://user-images.githubusercontent.com/1769806/113406072-88e3ed80-93b3-11eb-9674-797cd0fe4927.png)
