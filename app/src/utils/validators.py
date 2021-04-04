@@ -1,3 +1,5 @@
+import re
+
 from src.schemas.users import user_schema
 from src.schemas.companies import company_schema
 from src.utils.exceptions import InvalidBody
@@ -45,3 +47,9 @@ def validate_schema(body, schema, action_type):
         if 'min_length' in restriction:
             if len(body_value) < restriction['min_length']:
                 raise InvalidBody(f"{field} should be at least {restriction['min_length']}", status=400)
+
+        if restriction.get("is_email"):
+            email_regex = "^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$"
+            result = re.search(email_regex, body_value)
+            if not result:
+                raise InvalidBody(f"Email address is not valid for field {field}", status=400)

@@ -5,6 +5,7 @@ user_schema = {
         'type': str,
         'min_length': 1,
         'required': True,
+        'is_email': True,
     },
     'first_name': {
         'type': str,
